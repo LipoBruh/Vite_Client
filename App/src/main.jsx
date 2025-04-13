@@ -5,6 +5,7 @@ import {  createBrowserRouter, RouterProvider, Route, Routes } from 'react-route
 import "./index.css";
 import { Navigate } from "react-router-dom";
 import Discord from "./pages/Discord";
+import ErrorPage from "./pages/ErrorPage";
 
 
 //const routes = Object.values(BODY.routes).map((route,index) => ({element:<Page route={route} />, path:route.path, index:route.index, name:route.name}));
@@ -12,9 +13,10 @@ import Discord from "./pages/Discord";
 //const all = [...routes,homepage]
 
 const routes = [
-    {name : "About",path: "/About", element:<><div>About</div></>, index:false},
-    {name : "Events",path: "/Events", element:<><div>Events</div></>, index:false},
-    {name : "Discord",path: "/Discord", element:<Discord/>, index:false},
+    {name : "About",path: "/App/About", element:<><div>About</div></>, index:false},
+    {name : "Events",path: "/App/Events", element:<><div>Events</div></>, index:false},
+    {name : "Discord",path: "/App/Discord", element:<Discord/>, index:false},
+    {name : "Error",path: "*", element:<ErrorPage/>, index:false},
 ]
 
 //Routes or pages that we would like to be managed by React router:
@@ -24,13 +26,21 @@ const routes = [
 //Discord -> Fun way to interact with the chat
 //Index
 
-const router = createBrowserRouter([{
-  path:'/',
-  element : <App routes = {routes} />,
-  children : routes,
-  
-}],{
-  basename: '/App/',
+const router = createBrowserRouter(
+  [
+    {
+      path:'/',
+      element:<div>error</div>
+
+    },
+    {
+      path:'/App',
+      element : <App routes = {routes} />,
+      children : routes,
+
+    },
+],{
+  basename: '/',
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(
