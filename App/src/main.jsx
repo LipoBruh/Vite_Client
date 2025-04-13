@@ -6,6 +6,7 @@ import "./index.css";
 import { Navigate } from "react-router-dom";
 import Discord from "./pages/Discord";
 import ErrorPage from "./pages/ErrorPage";
+import About from "./pages/About";
 
 
 //const routes = Object.values(BODY.routes).map((route,index) => ({element:<Page route={route} />, path:route.path, index:route.index, name:route.name}));
@@ -13,7 +14,7 @@ import ErrorPage from "./pages/ErrorPage";
 //const all = [...routes,homepage]
 
 const routes = [
-    {name : "About",path: "/App/About", element:<><div>About</div></>, index:false},
+    {name : "About",path: "/App/About", element:<About/>, index:false},
     {name : "Events",path: "/App/Events", element:<><div>Events</div></>, index:false},
     {name : "Discord",path: "/App/Discord", element:<Discord/>, index:false},
     {name : "Error",path: "*", element:<ErrorPage/>, index:false},

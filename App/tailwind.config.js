@@ -16,18 +16,17 @@ export default {
 }*/
 
 
-import flowbite from 'flowbite/plugin';
-import flowbiteReact from 'flowbite-react/plugin/tailwindcss';
-
+import flowbiteReact from 'flowbite-react/dist/plugin';
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx,html,css}',
     './.flowbite-react/class-list.json',
+    ".flowbite-react\\class-list.json"
   ],
   theme: {
     extend: {},
   },
-  plugins: [flowbite, flowbiteReact],
+  plugins: ["@tailwindcss/postcss",flowbite, flowbiteReact],
 };
