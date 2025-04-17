@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-
+import { useGesture } from '@use-gesture/react';
+import { useRef } from 'react';
 
 export default function Die({die=6,img_path=("/d"+die+".png"),gif_path=("/d"+die+".gif"),reset_dice=(()=>{})}) {
 
@@ -141,11 +142,29 @@ export default function Die({die=6,img_path=("/d"+die+".png"),gif_path=("/d"+die
         }
     }
 
+    const DOUBLE_TAP_THRESHOLD = 300; // ms
+    const lastTap = useRef(0);
+    
+    const bind = useGesture({
+        onClick: ({ event }) => {
+          const now = Date.now();
+          const timeSince = now - lastTap.current;
+    
+          if (timeSince < DOUBLE_TAP_THRESHOLD) {
+            console.log('Double tap detected!');
+            // 🔥 Do something here on double tap
+          }
+    
+          lastTap.current = now;
+        },
+      });
+
+
     return (
 
     <div 
     tabIndex="0" 
-    className='relative h-[100%] aspect-square m-auto ' 
+    className='relative h-[100%] aspect-square m-auto  ' 
     /* Computer commands */ 
     onMouseEnter={()=>(setHover(true))}
     onMouseLeave={()=>(setHover(false))}
@@ -161,8 +180,8 @@ export default function Die({die=6,img_path=("/d"+die+".png"),gif_path=("/d"+die
 
     >
       {!hover?
-      <img src={img_path} alt={"d"+die} className='h-[90%] absolute top-1/2 right-1/2 transform -translate-y-1/2 translate-x-1/2'></img>:
-      <img src={gif_path} alt={"d"+die+"_gif"} className='h-[90%] absolute top-1/2 right-1/2 transform -translate-y-1/2 translate-x-1/2'></img>}
+      <img {...bind()} src={img_path} alt={"d"+die} className='h-[90%] absolute top-1/2 right-1/2 transform -translate-y-1/2 translate-x-1/2'></img>:
+      <img {...bind()} src={gif_path} alt={"d"+die+"_gif"} className='h-[90%] absolute top-1/2 right-1/2 transform -translate-y-1/2 translate-x-1/2'></img>}
 
 
         <div className={'absolute top-1/2 right-1/2 transform -translate-y-1/2 translate-x-1/2 text-white text-xl font-extrabold select-none '+(hover?"opacity-100 ":"opacity-0 ")}>

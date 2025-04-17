@@ -7,6 +7,7 @@ import { Navigate } from "react-router-dom";
 import Discord from "./pages/Discord";
 import ErrorPage from "./pages/ErrorPage";
 import About from "./pages/About";
+import Events from "./pages/Events";
 
 
 //const routes = Object.values(BODY.routes).map((route,index) => ({element:<Page route={route} />, path:route.path, index:route.index, name:route.name}));
@@ -15,7 +16,7 @@ import About from "./pages/About";
 
 const routes = [
     {name : "About",path: "/App/About", element:<About/>, index:false},
-    {name : "Events",path: "/App/Events", element:<><div>Events</div></>, index:false},
+    {name : "Events",path: "/App/Events", element:<Events/>, index:false},
     {name : "Discord",path: "/App/Discord", element:<Discord/>, index:false},
     {name : "Error",path: "*", element:<ErrorPage/>, index:false},
 ]
@@ -31,7 +32,8 @@ const router = createBrowserRouter(
   [
     {
       path:'/',
-      element:<div>error</div>
+      errorElement:<div>error</div>,
+      element:<><div>Empty page</div></>
 
     },
     {
